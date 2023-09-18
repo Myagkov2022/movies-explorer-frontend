@@ -1,0 +1,158 @@
+.header {
+    width: 100%;
+}
+
+.header__container {
+    min-height: 74px;
+    background-color: #465DFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0 70px;
+}
+
+.header__container-auth {
+    justify-content: flex-start;
+}
+.header__right {
+    display: flex;
+    align-items: center;
+}
+
+.header__signup {
+    padding: 0;
+    margin: 0 30px 0 0;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    text-decoration: none;
+    transition: 0.3s ease-in;
+}
+
+.header__signup:hover{
+    opacity: .7;
+}
+
+.header__signin {
+    padding: 8px 20px;
+    margin: 0;
+    border-radius: 3px;
+    background: #2BE080;
+    color: #000;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    text-decoration: none;
+    transition: 0.3s ease-in;
+}
+
+.header__signin:hover{
+    opacity: .8;
+}
+
+
+.header__container-white {
+    background-color: #fff;
+}
+.header__container-white a {
+    color: #000;
+}
+
+.header__auth-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 0 0 45px;
+}
+
+.header__auth-links {
+    margin: 0;
+    padding: 0;
+}
+
+
+.header__auth-account:hover {
+    opacity: .7;
+}
+
+
+.header__auth-link {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.3s ease-in;
+}
+.header__auth-link_films {
+    margin: 0 16px 0 0;
+}
+
+.header__auth-link_active {
+    font-weight: 500;
+}
+
+.header__auth-link:hover {
+    opacity: .7;
+}
+
+
+.header__auth-account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s ease-in;
+}
+
+.header__auth-account-logo {
+    margin: 0 0 0 17px;
+    color: #000;
+    padding: 8px 7px;
+    background-color: #2BE080;
+    border-radius: 4px;
+}
+
+.header__auth-account-logo_grey {
+   background-color: #F9F9F9;
+}
+
+@media screen and (max-width: 900px) {
+    .header__container {
+        padding-right:30px;
+        padding-left: 30px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .header__container {
+        padding-right:14px;
+        padding-left: 14px;
+    }
+    .header__signup {
+        font-size: 10px;
+        margin-right: 13px;
+    }
+    .header__signin {
+        font-size: 10px;
+        padding: 5px 12px;
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    .header__auth-nav {
+        display: none;
+    }
+    .header__container-auth {
+        justify-content: space-between;
+    }
+
+}

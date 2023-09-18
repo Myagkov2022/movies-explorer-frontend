@@ -1,0 +1,32 @@
+.result404 {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.result404__title {
+    color: #000;
+    text-align: center;
+    font-size: 140px;
+    font-weight: 400;
+    margin: 246px 0 5px 0;
+    padding: 0;
+}
+
+.result404__description {
+    color: #000;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+.result404__button {
+    margin: 184px 0 0;
+    color: #FF6838;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+}

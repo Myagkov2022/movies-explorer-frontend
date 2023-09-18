@@ -1,0 +1,127 @@
+.burger {
+    display: none;
+
+}
+
+.burger__button {
+    border: none;
+    background-color: transparent;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+}
+.burger__overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.burger__menu_active {
+    position: fixed;
+    width: 70%;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+}
+
+.burger__button_close {
+    width: 22px;
+    height: 22px;
+    background-color: transparent;
+    position: absolute;
+    top: 27px;
+    right: 27px;
+}
+.burger__close {
+    width: 100%;
+    height: 100%;
+}
+
+.burger__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+.burger__content {
+    padding: 159px 0 92px;
+    margin: 0 auto;
+    width: 340px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+
+}
+
+.burger__item {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+}
+.burger__link{
+    text-decoration: none;
+    padding:0 0  4px 0;
+    color: #000000;
+    transition: 0.3s ease-in;
+}
+
+.burger__link:hover {
+    opacity: .7;
+}
+.burger__item_active{
+    border-bottom: 2px solid #000;
+}
+
+.burger__bottom {
+    display: flex;
+    align-items: center;
+    transition: 0.3s ease-in;
+}
+
+.burger__account-link {
+    text-decoration: none;
+    color: #000000;
+}
+.burger__account {
+    margin: 0 17px 0 0;
+
+}
+
+.burger__account-icon {
+    width: 26px;
+    height: 30px;
+    padding: 8px 7px;
+    background-color: #F9F9F9;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.burger__bottom:hover {
+    opacity: .7;
+}
+@media screen and (max-width: 900px) {
+    .burger {
+        display: block;
+        z-index: 3;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+    .burger__menu_active {
+        width: 100%;
+    }
+
+}

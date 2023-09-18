@@ -1,0 +1,36 @@
+.movieCardList {
+    display: flex;
+    flex-direction: column;
+}
+
+.movieCardList__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 360px);
+    column-gap: 28px;
+    row-gap: 60px;
+    justify-content: center;
+    padding: 70px 0 28px;
+}
+
+
+
+
+
+@media screen and (max-width: 900px) {
+
+    .movieCardList__container {
+        grid-template-columns: repeat(auto-fill, 334px);
+        column-gap: 35px;
+        row-gap: 45px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+    .movieCardList__container {
+        grid-template-columns: repeat(auto-fill, 300px);
+        column-gap: 0;
+        row-gap: 20px;
+    }
+}
