@@ -7,6 +7,7 @@ import Result404 from "../Result404/Result404";
 import Profile from "../Profile/Profile";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import './App.css'
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(true);
