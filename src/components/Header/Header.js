@@ -10,13 +10,14 @@ function Header ({isLoggedIn}) {
         <>
             {!isLoggedIn ? (
                 <header className="header">
+
                     <div className="header__container">
                         <Link to="/">
                             <img src={logo} alt="Логотип" className="header__logo" />
                         </Link>
                         <div className="header__right">
                             <Link to="/signup" className="header__signup">
-                                Регистрация
+                                Регистрация {isLoggedIn}
                             </Link>
                             <Link to="/signin" className="header__signin">
                                 Войти

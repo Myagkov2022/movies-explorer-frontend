@@ -68,7 +68,11 @@
 }
 
 .movies-card__img {
-    max-width: 364px;
-    max-height: 203px;
+    width: 360px;
+    height: 203px;
     object-fit: cover;
+}
+
+.movies-card__link {
+text-decoration: none;
 }

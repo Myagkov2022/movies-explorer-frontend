@@ -1,22 +1,17 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css'
-function MoviesCardList ({isSavedMovies}) {
+function MoviesCardList ({movies, savedMovies, isSavedMovies, setSavedMovies, cardCounter, errorMessage}) {
+    let films =[]
+    if( movies.length>0) {
+        films = movies.slice(0, cardCounter)
+    }
 
     return (
         <section className="movieCardList">
+            {errorMessage && <p className="movieCardList__not-found"> {errorMessage}</p>}
             <div className="movieCardList__container">
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={false}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={false}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={true}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={false}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={true}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={false}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={false}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={false}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={true}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={false}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={false}/>
-                <MoviesCard  isSavedMovies={isSavedMovies} isSave={false}/>
+                {films.map(movie => <MoviesCard  key={movie.nameRu} movie={movie} savedMovies={savedMovies} isSavedMovies={isSavedMovies} setSavedMovies={setSavedMovies}/>)}
+
             </div>
         </section>
     )

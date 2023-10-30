@@ -13,7 +13,10 @@
 }
 
 
-
+.movieCardList__not-found {
+    text-align: center;
+    width: 100%;
+}
 
 
 @media screen and (max-width: 900px) {
