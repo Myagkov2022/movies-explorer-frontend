@@ -11,8 +11,7 @@ import './App.css'
 import mainApi from "../../utils/MainApi";
 import {CurrentUserContext} from '../../context/context'
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import MoviesApi from "../../utils/MoviesApi";
-import MainApi from "../../utils/MainApi";
+import moviesApi from "../../utils/MoviesApi";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,14 +25,16 @@ function App() {
     /*  USER*/
     useEffect(() => {
         if (isLoggedIn) {
-            Promise.all([mainApi.getUserInfo(), mainApi.getSavedMovies()])
-                .then(([res, savedMovies]) => {
+            setPreloader(true)
+            Promise.all([mainApi.getUserInfo(), mainApi.getSavedMovies(), moviesApi.getMovies()])
+                .then(([res, savedMovies,movies ]) => {
                     setCurrentUser(res);
                     setSavedMovies(savedMovies);
+                    setMovies(movies)
                 })
                 .catch((err) => {
                     console.log(err);
-                });
+                }).finally(()=> setPreloader(false));
         }
     }, [isLoggedIn]);
 
@@ -123,41 +124,6 @@ function App() {
                     setErrorMessage("При регистрации пользователя произошла ошибка.");
                 }
             });
-    }
-
-    useEffect(() => {
-        getMoviesHandler()
-        getSavedMoviesHandler()
-    }, [isLoggedIn]);
-
-    function getMoviesHandler() {
-        setPreloader(true)
-        MoviesApi
-            .getMovies()
-            .then(movies => {
-                setMovies(movies)
-            }).finally(()=>
-            setPreloader(false))
-    }
-
-    function getSavedMoviesHandler() {
-        MainApi
-            .getSavedMovies()
-            .then(movies => {
-                if (movies.message) {
-                    setErrorMessage(movies.message)
-                } else {
-                    setMovies(movies)
-                    setPreloader(false)
-                }
-            })
-            .catch(err => {
-                if (err) {
-                    setErrorMessage(
-                        "При загрузке произошла ошибка."
-                    );
-                }
-            })
     }
 
 

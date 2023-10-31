@@ -1,13 +1,14 @@
 import './SearchForm.css'
+
 function SearchForm (props) {
 function text (e) {
     props.setSearchText(e.target.value)
 }
 function changeChecked () {
     props.setIsChecked(!props.isChecked)
-    console.log(props.isChecked)
-    localStorage.setItem('isChecked',JSON.parse(!props.isChecked) )
+    localStorage.setItem('isChecked',JSON.stringify(!props.isChecked) )
 }
+
     return (
         <form noValidate className="search-form" onSubmit={e => e.preventDefault()}>
             <div className="search-form__container">

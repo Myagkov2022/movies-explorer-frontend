@@ -64,17 +64,20 @@ function Movies(props) {
         setErrorMessage('')
         props.setPreloader(true);
         setIsSearch(true)
+        console.log(1)
         if (searchText.length === 0) {
             setFilmsArray([]);
             localStorage.setItem('films', JSON.stringify([]))
             setErrorMessage('Необходимо задать поисковый запрос')
         } else {
+            console.log(2, props.movies)
             let films = props.movies.filter(
                 (obj) =>
                     obj.nameRU.toLowerCase().indexOf(searchText.toLowerCase()) !== -1 ||
                     obj.nameEN.toLowerCase().indexOf(searchText) !== -1
             )
             setFilmsArray(films)
+            console.log(films)
             localStorage.setItem('films', JSON.stringify(films))
         }
         localStorage.setItem('searchText', searchText)
@@ -84,7 +87,8 @@ function Movies(props) {
     };
 
     useEffect( () => {
-        if (filmsArray.length<=0 && searchText.length>0) {
+        if (filmsArray.length===0 && searchText.length>0) {
+            console.log(4567)
             setErrorMessage('Ничего не найдено')
         }
     }, [filmsArray])
