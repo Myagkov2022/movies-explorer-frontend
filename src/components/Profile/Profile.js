@@ -12,6 +12,7 @@ function Profile({isLoggedIn, setIsLoggedIn, updateUser, errorMessage,successMes
     const [errorMessagePatternName, setErrorMessagePatternName] = useState('')
     const [errorMessagePatternEmail, setErrorMessagePatternEmail] = useState('')
     const [isValid, setIsValid] = useState(false)
+    const [isDisabled, setIsDisabled] = useState(true)
     useEffect(() => {
         setSuccessMessage('')
     }, [name, email])
@@ -66,6 +67,14 @@ function Profile({isLoggedIn, setIsLoggedIn, updateUser, errorMessage,successMes
         e.preventDefault()
         updateUser(name, email)
     }
+
+    useEffect(()=> {
+        if (currentUser.name=== name && currentUser.email=== email) {
+            setIsDisabled(true)
+        } else {
+            setIsDisabled(false)
+        }
+    }, [name, email])
     return (
         <>
             <Header isLoggedIn={isLoggedIn}/>
@@ -109,7 +118,7 @@ function Profile({isLoggedIn, setIsLoggedIn, updateUser, errorMessage,successMes
                         <div className='profile__nav'>
                             <p className="profile__error">{errorMessage}</p>
                             <p className="profile__success">{successMessage} {isValid} {isChanged}</p>
-                            <button className='profile__button_edit' type='submit' disabled={!isChanged || !isValid}>Редактировать</button>
+                            <button className='profile__button_edit' type='submit' disabled={isDisabled}>Редактировать</button>
                             <button className='profile__button_sign-out' onClick={signOut} >Выйти из аккаунта</button>
                         </div>
                     </form>
