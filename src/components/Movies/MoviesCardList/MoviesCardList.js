@@ -10,7 +10,7 @@ function MoviesCardList ({movies, savedMovies, isSavedMovies, setSavedMovies, ca
         <section className="movieCardList">
             {errorMessage && <p className="movieCardList__not-found"> {errorMessage}</p>}
             <div className="movieCardList__container">
-                {films.map(movie => <MoviesCard  key={movie.nameRu} movie={movie} savedMovies={savedMovies} isSavedMovies={isSavedMovies} setSavedMovies={setSavedMovies}/>)}
+                {films.map(movie => <MoviesCard  key={movie.id} movie={movie} savedMovies={savedMovies} isSavedMovies={isSavedMovies} setSavedMovies={setSavedMovies}/>)}
 
             </div>
         </section>

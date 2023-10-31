@@ -52,7 +52,7 @@ function App() {
             .catch((err) => {
                 if (err) {
                     setErrorMessage(
-                        "При авторизации произошла ошибка. Переданный токен некорректен."
+                        "При авторизации произошла ошибка"
                     );
                 }
             });
@@ -60,7 +60,7 @@ function App() {
 
     function handleCheckToken() {
         if (localStorage.getItem("token")) {
-            setIsLoggedIn(true);
+            mainApi.headers.authorization=  `Bearer ${localStorage.getItem('token')}`
             mainApi
                 .getUserInfo()
                 .then((user) => {
@@ -78,7 +78,7 @@ function App() {
     }
     useEffect(() => {
         handleCheckToken();
-    }, []);
+    }, [isLoggedIn]);
 
     function updateUser( name, email ) {
         if (email !== currentUser.email || name !== currentUser.name) {

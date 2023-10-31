@@ -41,7 +41,13 @@ function Movies(props) {
         }
     }, [currentScreen]);
 
-
+    useEffect(() => {
+        if (localStorage.getItem('films') && localStorage.getItem('isChecked') && JSON.parse(localStorage.getItem('isSearch'))) {
+            setFilmsArray(JSON.parse(localStorage.getItem('films')))
+            setIsChecked(JSON.parse(localStorage.getItem('isChecked')))
+            setIsSearch(JSON.parse(localStorage.getItem('isSearch')))
+        }
+    }, [])
 
     const addMoviesCard = () => {
         let add = ADD_MOVIES_CARD_1280;
@@ -59,6 +65,7 @@ function Movies(props) {
         setIsSearch(true)
         if (searchText.length === 0) {
             setFilmsArray([]);
+            localStorage.setItem('films', JSON.stringify([]))
             setErrorMessage('Необходимо задать поисковый запрос')
         } else {
             let films = props.movies.filter(
