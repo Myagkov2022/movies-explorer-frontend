@@ -5,7 +5,7 @@ function MoviesCard ({isSavedMovies, movie,savedMovies, setSavedMovies}) {
     const durationHour = Math.floor(movie.duration / 60);
     const durationMin = movie.duration % 60;
     const [isSave, setIsSave] = useState(false);
-     let obj = {}
+    let obj = {}
     useEffect(() => {
         if (!isSavedMovies){
             obj = savedMovies.find(o => o.movieId === movie.id);
@@ -17,15 +17,16 @@ function MoviesCard ({isSavedMovies, movie,savedMovies, setSavedMovies}) {
 
     function deleteMovie(id) {
         mainApi.deleteMovie(id).then(() => {
-           mainApi.getSavedMovies().then(res => setSavedMovies(res))
+            setSavedMovies(savedMovies.filter((savedMovie) => movie.movieId !== savedMovie.movieId));
         })
     }
 
     function deleteSavedMovie() {
-         deleteMovie(movie._id)
+        deleteMovie(movie._id)
 
     }
 
+useEffect(()=>{console.log(savedMovies)},[])
 
     function toggleMovieLike(movie) {
         const isLiked = savedMovies.some(
@@ -75,11 +76,11 @@ function MoviesCard ({isSavedMovies, movie,savedMovies, setSavedMovies}) {
                             ?
                             <button className="movies-card__delete button" type="submit" onClick={deleteSavedMovie} ></button>
                             :
-                                isSave
-                                    ?
-                                    <button className="movies-card__save movies-card__save_active button" type="submit" onClick={handleDelete}></button>
-                                    :
-                                    <button className="movies-card__save button" type="submit"  onClick={handleDelete}></button>
+                            isSave
+                                ?
+                                <button className="movies-card__save movies-card__save_active button" type="submit" onClick={handleDelete}></button>
+                                :
+                                <button className="movies-card__save button" type="submit"  onClick={handleDelete}></button>
 
                     }
                 </div>

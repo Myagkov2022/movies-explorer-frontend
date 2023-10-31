@@ -199,7 +199,7 @@ function App() {
                                 setSavedMovies={setSavedMovies}
                             /> }/>
 
-                            <Route exact path="/profile" element={<Profile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} updateUser={updateUser}  errorMessage={errorMessage} successMessage={successMessage} setSuccessMessage={setSuccessMessage}/>} />
+                            <Route exact path="/profile" element={ <ProtectedRoute element={Profile}  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} updateUser={updateUser}  errorMessage={errorMessage} successMessage={successMessage} setSuccessMessage={setSuccessMessage}/>} />
                             <Route exact path="*" element={<Result404/>} />
                         </Routes>
                     </div>

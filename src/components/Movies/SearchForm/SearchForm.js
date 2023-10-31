@@ -6,6 +6,7 @@ function text (e) {
 function changeChecked () {
     props.setIsChecked(!props.isChecked)
     console.log(props.isChecked)
+    localStorage.setItem('isChecked',JSON.parse(!props.isChecked) )
 }
     return (
         <form noValidate className="search-form" onSubmit={e => e.preventDefault()}>

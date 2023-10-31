@@ -18,11 +18,11 @@ import {
 function Movies(props) {
 
     const [cardCounter, setCardCounter] = useState(0);
-    const [isChecked, setIsChecked] = useState(JSON.parse(localStorage.getItem('isChecked')) ||false); //активирован ли чекбокс
+    const [isChecked, setIsChecked] = useState(false); //активирован ли чекбокс
     const [errorMessage, setErrorMessage] = useState(''); // обработка ошибок
-    const [isSearch, setIsSearch] = useState(JSON.parse(localStorage.getItem('isSearch')) || false); //выполнен ли поиск
-    const [filmsArray, setFilmsArray] = useState(JSON.parse(localStorage.getItem('films')) || []);
-    const [searchText, setSearchText] = useState(localStorage.getItem('searchText') || '')
+    const [isSearch, setIsSearch] = useState(false); //выполнен ли поиск
+    const [filmsArray, setFilmsArray] = useState( []);
+    const [searchText, setSearchText] = useState('')
     const { currentScreen } = useResize();
     useEffect(() => {
         switch (currentScreen) {
@@ -42,10 +42,11 @@ function Movies(props) {
     }, [currentScreen]);
 
     useEffect(() => {
-        if (localStorage.getItem('films') && localStorage.getItem('isChecked') && JSON.parse(localStorage.getItem('isSearch'))) {
+        if (localStorage.getItem('films')) {
             setFilmsArray(JSON.parse(localStorage.getItem('films')))
             setIsChecked(JSON.parse(localStorage.getItem('isChecked')))
             setIsSearch(JSON.parse(localStorage.getItem('isSearch')))
+            setSearchText(localStorage.getItem('searchText'))
         }
     }, [])
 
@@ -73,19 +74,10 @@ function Movies(props) {
                     obj.nameRU.toLowerCase().indexOf(searchText.toLowerCase()) !== -1 ||
                     obj.nameEN.toLowerCase().indexOf(searchText) !== -1
             )
-            if (isChecked) {
-                const shortFilms = films.filter(film => film.duration <= SHORTS_MOVIES)
-                setFilmsArray(shortFilms)
-                localStorage.setItem('films', JSON.stringify(shortFilms))
-            } else {
-                setFilmsArray(films)
-                localStorage.setItem('films', JSON.stringify(films))
-            }
-
-
+            setFilmsArray(films)
+            localStorage.setItem('films', JSON.stringify(films))
         }
         localStorage.setItem('searchText', searchText)
-        localStorage.setItem('isChecked', JSON.stringify(isChecked))
         localStorage.setItem('isSearch', JSON.stringify(isSearch))
         props.setPreloader(false);
 
@@ -97,6 +89,11 @@ function Movies(props) {
         }
     }, [filmsArray])
 
+    const filteredMovies = isChecked
+        ? filmsArray.filter((filteredMovie) => filteredMovie.duration <= SHORTS_MOVIES)
+        : filmsArray;
+
+
     return (
         <>
             <Header isLoggedIn={props.isLoggedIn}/>
@@ -105,8 +102,8 @@ function Movies(props) {
 
                     <SearchForm findFilms={findFilms} setSearchText={setSearchText} searchText={searchText} setIsChecked={setIsChecked} isChecked={isChecked}/>
                     { props.preloader ? <Preloader /> :
-                        isSearch && <MoviesCardList movies={filmsArray? filmsArray : []} savedMovies={props.savedMovies} setSavedMovies={props.setSavedMovies} cardCounter={cardCounter} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
-                    {cardCounter  < filmsArray.length && <button className="movies__button" onClick={addMoviesCard}>Еще</button>}
+                        isSearch && <MoviesCardList movies={filteredMovies? filteredMovies : []} savedMovies={props.savedMovies} setSavedMovies={props.setSavedMovies} cardCounter={cardCounter} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
+                    {cardCounter  < filteredMovies.length && <button className="movies__button" onClick={addMoviesCard}>Еще</button>}
                 </div>
             </main>
             <Footer />

@@ -1,6 +1,6 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css'
-function MoviesCardList ({movies, savedMovies, isSavedMovies, setSavedMovies, cardCounter, errorMessage}) {
+function MoviesCardList ({movies, isSavedMovies, savedMovies,setSavedMovies, cardCounter, errorMessage}) {
     let films =[]
     if( movies.length>0) {
         films = movies.slice(0, cardCounter)

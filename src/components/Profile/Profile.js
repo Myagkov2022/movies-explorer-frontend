@@ -71,7 +71,7 @@ function Profile({isLoggedIn, setIsLoggedIn, updateUser, errorMessage,successMes
             <Header isLoggedIn={isLoggedIn}/>
             <section className="profile">
                 <div className="profile__container">
-                    <h2 className='profile__greeting'>Привет, {name}! </h2>
+                    <h2 className='profile__greeting'>Привет, {currentUser.name}! </h2>
                     <form className='profile__form' noValidate onSubmit={submitUpdate}>
                         <fieldset className='profile__fieldset'>
                             <label className='profile__label'>

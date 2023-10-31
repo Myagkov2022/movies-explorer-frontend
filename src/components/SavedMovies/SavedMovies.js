@@ -6,15 +6,19 @@ import './SavedMovies.css'
 import {useEffect, useState} from "react";
 import {SHORTS_MOVIES} from "../../utils/constants";
 
+
 function SavedMovies(props) {
     const [isChecked, setIsChecked] = useState( false);
     const [errorMessage, setErrorMessage] = useState('');
     const [filmsArray, setFilmsArray] = useState( props.movies);
-    const [searchText, setSearchText] = useState('')
-useEffect(() => {
-    setFilmsArray( props.movies)
-},[props.movies])
+    const [searchText, setSearchText] = useState('');
+
+    useEffect(() => {
+        setFilmsArray( props.movies)
+    },[props.movies])
+
     const findFilms = () => {
+
         setErrorMessage('')
         if (searchText.length === 0) {
             setFilmsArray([]);
@@ -31,21 +35,36 @@ useEffect(() => {
             } else {
                 setFilmsArray(films)
             }
-            if (filmsArray.length<=0) {
-                setErrorMessage('Ничего не найдено')
-            }
+
 
         }
-
-
     };
+    useEffect( () => {
+        if (filmsArray.length<=0 && searchText.length>0) {
+            setErrorMessage('Ничего не найдено')
+        }
+    }, [filmsArray])
+
+    const filteredMovies = isChecked
+        ? filmsArray.filter((filteredMovie) => filteredMovie.duration <= SHORTS_MOVIES)
+        : filmsArray;
+
+    useEffect(() => {
+        if (!searchText && !isChecked) {
+            setFilmsArray(props.movies)
+        }  else  if (searchText && !isChecked) {
+            findFilms()
+        } else {
+            setFilmsArray(props.movies)
+        }
+    }, [props.movies])
     return (
         <>
             <Header isLoggedIn={props.isLoggedIn}/>
             <main className="movies">
                 <div className="movies__container">
                     <SearchForm findFilms={findFilms} setSearchText={setSearchText} searchText={searchText} setIsChecked={setIsChecked} isChecked={isChecked}/>
-                    <MoviesCardList isSavedMovies={props.isSavedMovies} movies={filmsArray? filmsArray : []} setSavedMovies={props.setSavedMovies} errorMessage={errorMessage}/>
+                    <MoviesCardList isSavedMovies={props.isSavedMovies} movies={filteredMovies? filteredMovies : []} savedMovies={props.movies} setSavedMovies={props.setSavedMovies} errorMessage={errorMessage} />
                 </div>
             </main>
             <Footer/>
