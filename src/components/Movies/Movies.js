@@ -47,6 +47,7 @@ function Movies(props) {
             setIsChecked(JSON.parse(localStorage.getItem('isChecked')))
             setIsSearch(JSON.parse(localStorage.getItem('isSearch')))
             setSearchText(localStorage.getItem('searchText'))
+
         }
     }, [])
 
@@ -106,8 +107,8 @@ function Movies(props) {
 
                     <SearchForm findFilms={findFilms} setSearchText={setSearchText} searchText={searchText} setIsChecked={setIsChecked} isChecked={isChecked}/>
                     { props.preloader ? <Preloader /> :
-                        isSearch && <MoviesCardList movies={filteredMovies? filteredMovies : []} savedMovies={props.savedMovies} setSavedMovies={props.setSavedMovies} cardCounter={cardCounter} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
-                    {cardCounter  < filteredMovies.length && <button className="movies__button" onClick={addMoviesCard}>Еще</button>}
+                        filteredMovies && <MoviesCardList movies={filteredMovies? filteredMovies : []} savedMovies={props.savedMovies} setSavedMovies={props.setSavedMovies} cardCounter={cardCounter} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
+                    {cardCounter  < filteredMovies.length && !props.preloader && <button className="movies__button" onClick={addMoviesCard}>Еще</button>}
                 </div>
             </main>
             <Footer />
